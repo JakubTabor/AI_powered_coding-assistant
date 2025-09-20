@@ -1,0 +1,170 @@
+/*
+  style.css – Calculator UI styling
+  Implements responsive layout, theme variables, and accessible button states.
+*/
+
+/* --------------------------------------------------------------------------
+   Root variables – colors, spacing, typography
+   -------------------------------------------------------------------------- */
+:root {
+  /* Colors */
+  --color-bg: #f9f9f9;
+  --color-surface: #ffffff;
+  --color-primary: #4a90e2;        /* operators */
+  --color-number: #333333;        /* numbers */
+  --color-clear: #e74c3c;         /* clear */
+  --color-backspace: #e67e22;    /* backspace */
+  --color-equals: #27ae60;       /* equals */
+  --color-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-size-base: 1rem;   /* 16px */
+  --font-size-display: 2rem; /* larger for the display */
+  --font-size-btn: 1.2rem;
+
+  /* Spacing */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+
+  /* Sizing */
+  --button-height: 3rem;
+  --button-radius: 0.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   Global resets & utilities
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg);
+  color: var(--color-number);
+  line-height: 1.5;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing-md);
+}
+
+/* --------------------------------------------------------------------------
+   Calculator container
+   -------------------------------------------------------------------------- */
+.calculator {
+  background: var(--color-surface);
+  max-width: 400px;
+  width: 100%;
+  padding: var(--spacing-lg);
+  border-radius: var(--spacing-sm);
+  box-shadow: 0 4px 12px var(--color-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* --------------------------------------------------------------------------
+   Display – read‑only input
+   -------------------------------------------------------------------------- */
+.display {
+  width: 100%;
+  font-size: var(--font-size-display);
+  text-align: right;
+  padding: var(--spacing-sm);
+  border: 1px solid #ddd;
+  border-radius: var(--button-radius);
+  background: #fafafa;
+  cursor: default; /* disabled cursor */
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons grid
+   -------------------------------------------------------------------------- */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Base button style
+   -------------------------------------------------------------------------- */
+.btn {
+  height: var(--button-height);
+  font-size: var(--font-size-btn);
+  border: none;
+  border-radius: var(--button-radius);
+  background: #e0e0e0;
+  color: #222;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* --------------------------------------------------------------------------
+   Modifier classes – colour variations
+   -------------------------------------------------------------------------- */
+.btn.number {
+  background: #f5f5f5;
+  color: var(--color-number);
+}
+
+.btn.operator {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn.clear {
+  background: var(--color-clear);
+  color: #fff;
+}
+
+.btn.backspace {
+  background: var(--color-backspace);
+  color: #fff;
+}
+
+.btn.equals {
+  background: var(--color-equals);
+  color: #fff;
+  grid-column: span 2; /* make equals button double width */
+}
+
+/* --------------------------------------------------------------------------
+   Responsive adjustments – mobile view
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  :root {
+    --button-height: 2.5rem;
+    --font-size-display: 1.5rem;
+    --font-size-btn: 1rem;
+    --spacing-lg: 1rem;
+    --spacing-md: 0.75rem;
+  }
+
+  .calculator {
+    padding: var(--spacing-md);
+  }
+}
